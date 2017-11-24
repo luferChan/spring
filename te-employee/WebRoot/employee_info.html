@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业级员工信息管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="css/bootstrap-dialog.min.css" rel="stylesheet">
+    <link href="js/plugins/kindeditor-4.1.10/themes/default/default.css" rel="stylesheet">
+    <script src="./js/jquery-1.11.1.min.js"></script>  
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-dialog.min.js"></script>
+	<script src="./js/common.js"></script>
+	<script src="./js/employee_info.js"></script>
+	<script src="./js/plugins/my97datepicker/WdatePicker.js"></script>
+	<script src="./js/plugins/kindeditor-4.1.10/kindeditor-min.js"></script>
+	<script src="./js/plugins/kindeditor-4.1.10/zh_CN.js"></script>
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+  
+	  <nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container">
+	
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	      <ul class="nav navbar-nav">
+	      	<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> 首页</a>
+	       
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">员工信息管理 <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+		            <li><a href="#">实习员工</a></li>
+		            <li><a href="#">正式员工</a></li>
+		            <li><a href="#">培训项目</a></li>
+		            <li><a href="#">离职员工</a></li>
+		           
+	          </ul>
+	        </li>
+	        
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">考勤与薪酬 <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+		            <li><a href="#">员工考勤</a></li>
+		            <li><a href="#">员工薪酬</a></li>	           
+	          </ul>
+	        </li>
+	        
+	        <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">部门与职位 <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+		            <li><a href="#">部门管理</a></li>
+		            <li><a href="#">职位管理</a></li>   
+	          </ul>
+	        </li>
+	        
+	         <li class="dropdown">
+	          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">权限管理 <span class="caret"></span></a>
+	          <ul class="dropdown-menu">
+		            <li><a href="#">帐号管理</a></li>
+		            <li><a href="#">角色管理</a></li>   
+	          </ul>
+	        </li>
+
+	      </ul>
+	      
+		  <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#" class="dropdown-toggle"><span class="glyphicon glyphicon-user"></span> Admin</a></li>
+	        <li><a href="#" class="dropdown-toggle Logout">注销</a></li>
+	      </ul>
+	    </div>
+	  </div>
+	</nav>
+      
+      <div class="container breadcrumb-container">
+	      <ol class="breadcrumb">
+			  <li>首页</li>
+			  <li>员工信息管理</li>
+			  <li class="active">实习员工</li>
+		  </ol>
+	  </div>
+   
+		<div class="container main-container">
+		
+			<div class="emp-box">
+				<span class="emp-title">新增员工信息</span>
+				<div class="row">
+					<div class="col-md-6">带<span>*</span> 为必填项</div>
+					<div class="col-md-6 btn-emp-newmsg">
+						<button type="button" class="btn btn-info btn-saveORmodify"><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp;保存或修改信息</button>
+					</div>
+				</div>  
+				<!-- 基本信息表格 -->
+				<table class="table table-bordered margin_top_10 emp-table">
+				<tr>
+					<td class="emp-key fullname-Label"><span>*</span>姓名</td>
+					<td><input type="text" class='emp-input fullname' placeholder="输入姓名"></input></td>
+					<td class="emp-key optionsRadiosSex-Label"><span>*</span>性别</td>
+					<td colspan="3">
+						
+							<label class="emp-label">
+							<input type="radio" name="optionsRadiosSex" class="optionsRadiosSex" id="optionsRadios1" value="男"  >
+								男
+							</label>
+							
+							<label class="emp-label">
+							<input type="radio" name="optionsRadiosSex" class="optionsRadiosSex" id="optionsRadios2" value="女"  >
+								女
+							</label>
+						
+					</td>
+					<td class="emp-photo" rowspan="5">
+						<img alt="" src="./images/defaultphoto.jpg" class="emp-photoImg" >
+					</td>
+				</tr>
+				
+				<tr>
+					<td class="emp-key id-number-Label"><span>*</span>身份证号</td>
+					<td><input type="text" class='emp-input id-number' placeholder="输入身份证号"></input></td>
+					<td class="emp-key birthday-Label"><span>*</span>出生年月</td>
+					<td>
+						<input type="text" class='emp-input datePicker-before birthday' placeholder="选择出生年月"></input>
+					</td>
+					<td class="emp-key cardNumber-Label">社保卡号</td>
+					<td><input type="text" class='emp-input cardNumber' placeholder="社保卡号（非必填项）"></input></td>
+					
+				</tr>
+				
+				<tr>
+					<td class="emp-key department-Label"><span>*</span>部门</td>
+					<td>
+						<select class="emp-select department">
+							<option value="-1">请选择部门</option>
+							<option value="0">人事部</option>
+						</select>
+					</td>
+					<td class="emp-key position-Label"><span>*</span>职位</td>
+					<td>
+						<select class="emp-select position"><option value="-1">请选择职位</option></select>
+					</td>
+					<td class="emp-key dutyDate-Label"><span>*</span>上岗日期</td>
+					<td><input type="text" class='emp-input datePicker dutyDate' placeholder="选择上岗日期"></input></td>
+					
+				</tr>
+				
+				<tr>
+					<td class="emp-key optionsRadiosCulture-Label"><span>*</span>文化程度</td>
+					<td colspan="5">
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture1" value="不识字"  >
+								不识字
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture2" value="小学"  >
+								小学
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture3" value="初中"  >
+								初中
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture4" value="技工"  >
+								技工
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture5" value="高中"  >
+								高中
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture6" value="本科"  >
+								本科
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture7" value="硕士"  >
+								硕士
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosCulture" class="optionsRadiosCulture" id="optionsRadiosCulture8" value="博士及以上"  >
+								博士及以上
+						</label>
+					</td>
+				
+				</tr>
+				
+				<tr>
+					<td class="emp-key optionsRadiosMarriage-Label"><span>*</span>婚姻状况</td>
+					<td colspan="5">
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosMarriage" class="optionsRadiosMarriage" id="optionsRadios1" value="未婚"  >
+								未婚
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosMarriage" class="optionsRadiosMarriage" id="optionsRadios2" value="已婚"  >
+								已婚
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosMarriage" class="optionsRadiosMarriage" id="optionsRadios3" value="丧偶"  >
+								丧偶
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosMarriage" class="optionsRadiosMarriage" id="optionsRadios4" value="离婚"  >
+								离婚
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosMarriage" class="optionsRadiosMarriage" id="optionsRadios5" value="其他"  >
+								其他
+						</label>
+					</td>
+					
+				</tr>
+				
+				<tr>
+					<td class="emp-key optionsRadiosStatus-Label"><span>*</span>政治面貌</td>
+					<td colspan="6">
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios1" value="无党派民主人士"  >
+								无党派民主人士
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios2" value="中共党员"  >
+								中共党员
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios3" value="共青团员"  >
+								共青团员
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios4" value="民革党员"  >
+								民革党员
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios5" value="民盟党员"  >
+								民盟党员
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios6" value="农工党党员"  >
+								农工党党员
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosStatus" class="optionsRadiosStatus" id="optionsRadios7" value="其他"  >
+								其他
+						</label>
+					</td>		
+				</tr>
+				
+				<tr>
+					<td class="emp-key optionsRadiosNation-Label"><span>*</span>民族</td>
+					<td colspan="6">
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios1" value="汉族"  >
+								汉族
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios2" value="藏族"  >
+								藏族
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios3" value="彝族"  >
+								彝族
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios4" value="回族"  >
+								回族
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios5" value="维族"  >
+								维族
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios6" value="苗族"  >
+								苗族
+						</label>
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosNation" class="optionsRadiosNation" id="optionsRadios7" value="其他"  >
+								其他
+						</label>
+					</td>		
+				</tr>
+			</table>
+			
+			<!-- 地址信息表格 -->
+			<table class="table table-bordered margin_top_10 emp-table">
+				<tr>
+					<td class="emp-key"><span>*</span>户籍地址</td>
+					<td colspan="6">
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<input type="text" class='emp-input emp-address-input' placeholder="详细信息"></input>				
+					</td>		
+				</tr>
+				
+				<tr>
+					<td class="emp-key"><span>*</span>现居住地址</td>
+					<td colspan="6">
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<select class="emp-select emp-address"><option>请选择</option></select>
+						<input type="text" class='emp-input emp-address-input' placeholder="详细信息"></input>				
+					</td>		
+				</tr>
+			</table>
+			
+			<!-- 详细信息表格 -->
+			<table class="table table-bordered margin_top_10 emp-table">
+				<tr>
+					<td class="emp-key"><span>*</span>手机号码：</td>
+					<td><input type="text" class='emp-input' placeholder="手机号码"></input></td>	
+					<td class="emp-key"><span>*</span>其他联系方式：</td>
+					<td colspan="3"><input type="text" class='emp-input' placeholder="其他联系方式"></input></td>	
+				</tr>
+				<tr>
+					<td class="emp-key"><span>*</span>紧急联系人：</td>
+					<td><input type="text" class='emp-input' placeholder="紧急联系人"></input></td>	
+					<td class="emp-key"><span>*</span>联系电话：</td>
+					<td colspan="3"><input type="text" class='emp-input' placeholder="联系电话"></input></td>	
+				</tr>
+				<tr>
+					<td class="emp-key">毕业院校：</td>
+					<td><input type="text" class='emp-input' placeholder="毕业院校"></input></td>	
+					<td class="emp-key">所学专业：</td>
+					<td colspan="3"><input type="text" class='emp-input' placeholder="所学专业"></input></td>	
+				</tr>
+				<tr>
+					<td class="emp-key">毕业时间：</td>
+					<td><input type="text" class='emp-input datePicker' placeholder="毕业时间"></input></td>	
+					<td class="emp-key">学历：</td>
+					<td ><input type="text" class='emp-input' placeholder="学历"></input></td>	
+					<td class="emp-key">获得学位：</td>
+					<td ><input type="text" class='emp-input' placeholder="获得学位"></input></td>
+				</tr>
+				<tr>
+					<td class="emp-key"><span>*</span>是否缴纳社保：</td>
+					<td colspan="5">
+						<label class="emp-label">
+							<input type="radio" name="optionsRadiosShebao" id="optionsRadios1" value="option1"  >
+								是
+							</label>
+							
+							<label class="emp-label">
+							<input type="radio" name="optionsRadiosShebao" id="optionsRadios2" value="option2"  >
+								否
+						</label>
+					</td>	
+					
+				</tr>
+				<tr>
+					<td class="emp-key">备注：</td>
+					<td colspan="5"><input type="text" class='emp-input' placeholder="备注"></input></td>			
+				</tr>
+			</table>
+			
+			<table class="table table-bordered margin_top_10 emp-table">
+				<tr>
+					<td class="emp-key"><button type="button" class="btn btn-success btn-xs btn-addJob">新增工作经历</button></td>
+					<td>
+						<table class="table table-bordered emp-table">
+							<thead>
+								<tr>
+									<th>单位名称</th>
+									<th>入职时间</th>
+									<th>离职时间</th>
+									<th>岗位</th>
+									<th>离职原因</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody class="tbody-jobList">
+								<tr class="tr-job">
+									<td><input type="text" class='emp-input' placeholder="单位名称"></input></td>
+									<td><input type="text" class='emp-input datePicker' onclick="InitWdatePicker()" onfocus="InitWdatePicker()" placeholder="入职时间"></input></td>
+									<td><input type="text" class='emp-input datePicker' onclick="InitWdatePicker()" onfocus="InitWdatePicker()" placeholder="离职时间"></input></td>
+									<td><input type="text" class='emp-input' placeholder="岗位"></input></td>
+									<td><input type="text" class='emp-input' placeholder="离职原因"></input></td>
+									<td><button type="button" class="btn btn-danger btn-xs"  onclick="removeCurrent(this)">移除</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</td>				
+				</tr>
+			</table>
+			
+			<div class="emp-note">
+				1. 此表为公司人力资源部填写，将被用于人力资源管理事宜。请据实填写。<br>
+				2. 此表由公司定期组织填写，期间如有重要变更请及时通知人力资源部。
+			</div>
+			
+			</div>		
+			
+			
+						
+		</div>
+
+   	  
+   	     
+      <div class="container foot-container"> 开发者 - lufer -<a href="http://weibo.com/yelingfei"> 新浪微博</a></div>
+      
+  </body>
+</html>

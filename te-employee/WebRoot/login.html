@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/common.css" rel="stylesheet">
+    <link href="./css/bootstrap-dialog.min.css" rel="stylesheet">
+    <script src="./js/jquery-1.11.1.min.js"></script>  
+    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/common.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/bootstrap-dialog.min.js"></script>
+
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+
+	<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document" style="width: 420px">
+	    <div class="modal-content login-modal-content">
+	      <div class="modal-header  login-modal-header">        
+	        <h4 class="modal-title" id="myModalLabel">用户登陆</h4>
+	      </div>
+	      <div class="modal-body">
+	        <table class="login_table">
+	        	<tr>
+	        		<td></td>
+	        		<td>初始帐号/密码： admin   /   123456   </td>
+	        		
+	        	</tr>
+	        	<tr class="login_tr">		
+	        		<td class="login_key">用户名：</td>
+	        		<td><input type="text" class="form-control username" placeholder="用户名：">
+	        		</td>
+	        	</tr>
+	        	<tr class="login_tr">
+	        		<td class="login_key">密码：</td>
+	        		<td><input type="password" class="form-control password" placeholder="密码：">
+	        		</td>
+	        	</tr>
+	        	<tr class="login_tr">
+	        		<td class="login_key">验证码：</td>
+	        		<td><input type="text" maxlength="4" class="form-control verify" placeholder="验证码：">
+	        			<img alt="" src="./mgr/0/findVerifyCode" class="login-verify-img">
+	        		</td>
+	        	</tr>
+	        </table>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default reset login_btn">重置</button>
+	        <button type="button" class="btn btn-primary login_btn login-confirm">登陆</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+  </body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>企业级员工信息管理系统</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap-dialog.min.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <script src="../js/jquery-1.11.1.min.js"></script>  
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap-dialog.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		$('button.demo01').on('click',function(e){
+    			Dialog.msg("点击成功触发！");
+    		});
+    		$('button.demo02').on('click',function(e){
+    			Dialog.confirm("点击确认", function(){
+    				alert("xxxxxx....")
+    			});
+    		});
+    	});
+    	
+
+    </script>
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  
+  <body>
+ 	<button type="button" class="btn btn-success demo01">Demo01</button>
+ 	<button type="button" class="btn btn-success demo02">Demo02</button>
+  </body>
+</html>
