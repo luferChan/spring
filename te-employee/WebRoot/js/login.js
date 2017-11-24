@@ -41,6 +41,7 @@
 						window.location.href = './index.html';
 						return;
 					}
+					//刷新验证码
 					login.resetVerifyCode();
 				});
 			},
