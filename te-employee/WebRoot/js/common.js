@@ -78,6 +78,19 @@ $(function(){
 		
 		return data.head;
 	};
+	
+	$.verify = true;
+	
+	// 获取并验证input表单中的数据，最后将数据返回。
+	$.verifyForm = function(classname,isNull){
+		$(classname).removeClass('border-red');
+		var val =  $(classname).val();
+		if(val == null || val == "" || val.length<=0){
+			$.verify = false;
+			$(classname).addClass('border-red');
+		}
+		return val;
+	};
 })(jQuery);
 
 

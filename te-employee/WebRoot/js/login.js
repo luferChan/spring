@@ -27,13 +27,21 @@
 			 */
 			'login' : function(){
 				
-				var uname = $('input.username').val();
-				var pword = $('input.password').val();
-				var verify = $('input.verify').val();
+				$.verify = true;
+				var uname = $.verifyForm('input.username');
+				var pword = $.verifyForm('input.password');
+				var verify = $.verifyForm('input.verify');
+				
+				if($.verify == false){
+					return ;
+				}
 				
 				$.post('./mgr/0/login',{
+					// 左边为后台所需要传入的参数名
 					username : uname,
 					password : pword,
+					verify : verify
+					
 					
 				},function(data){
 					// if true 跳转， false这边无操作

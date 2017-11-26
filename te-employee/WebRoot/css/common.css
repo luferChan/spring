@@ -10,6 +10,8 @@ input:focus, select:focus{outline: 0 none;}
 .navbar a{color: #ffffff !important; }
 .dropdown-menu a{color:#000000 !important;}
 .navbar-brand{font-size: 14px;font-family:'Î¢ÈíÑÅºÚ';}
+.border-red{border-color: red;}
+
 
 .text_align_right{text-align: right;}
 .select_control{width: 120px;}
