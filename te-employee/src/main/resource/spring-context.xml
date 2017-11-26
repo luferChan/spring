@@ -86,4 +86,8 @@
 		<aop:advisor advice-ref="teMethodIntercept" pointcut-ref="method" />
 	</aop:config>
 	
+	<mvc:interceptors>
+		<bean class="com.te.empl.intercept.TeIntercept"></bean>
+	</mvc:interceptors>
+	
 </beans>

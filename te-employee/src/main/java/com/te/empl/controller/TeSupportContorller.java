@@ -44,5 +44,10 @@ public class TeSupportContorller {
 		return teAccountService.login(username,password,request);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/demo")
+	public JSONReturn demo(){
+		return JSONReturn.buildSuccess("LUFER_DEMO_SUCCESS");
+	}
 }
 
