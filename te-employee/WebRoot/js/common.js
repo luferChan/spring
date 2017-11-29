@@ -70,14 +70,22 @@ $(function(){
 (function($){
 	// 检测后台返回的数据是否成功
 	$.isSuccess = function(data){
+		if(typeof data != 'object'){
+			data = $.parseJSON(data);
+		}
 		if(data.head){
 			return data.head;
+		}
+		if('UNLOGIN' == data.body){
+			window.location.href = './login.html';
+			return false;
 		}
 		// if false 弹窗提示 刷新验证码 返回false
 		Dialog.msg(data.body);
 		
 		return data.head;
 	};
+	
 	
 	$.verify = true;
 	
