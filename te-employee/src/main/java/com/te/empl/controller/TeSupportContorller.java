@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.te.empl.constant.SessionKey;
 import com.te.empl.service.TeAccountService;
+import com.te.empl.service.TeModuleService;
 import com.te.empl.support.JSONReturn;
 import com.te.empl.support.RandomValidateCode;
 
@@ -21,7 +22,8 @@ public class TeSupportContorller {
 	
 	@Autowired
 	private TeAccountService teAccountService;
-	
+	@Autowired
+	private TeModuleService teModuleService;
 	
 	@RequestMapping(value="/0/findVerifyCode")
 	public void findVerifyCode(HttpServletRequest request,HttpServletResponse response){
@@ -33,7 +35,7 @@ public class TeSupportContorller {
 	@RequestMapping(value = "/0/login")
 	public JSONReturn login(@RequestParam String username,@RequestParam String password,@RequestParam String verify, HttpServletRequest request,HttpServletResponse response){
 		// 处理图形验证码的检测
-		//判空
+		//判空 
 		if(StringUtils.isEmpty(verify)){
 			return JSONReturn.buildFailure("验证码为空...");
 		}
@@ -45,9 +47,9 @@ public class TeSupportContorller {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/demo")
-	public JSONReturn demo(){
-		return JSONReturn.buildSuccess("LUFER_DEMO_SUCCESS");
+	@RequestMapping(value = "/0/getMenu")
+	public JSONReturn getMenu(){
+		return teModuleService.getMenu();
 	}
 }
 
