@@ -19,6 +19,13 @@
     	});
     	//点击登录后 校验数据
     	$('button.login-confirm').on('click',login.login);
+    	//监听3个输入框的按键事件，如果是回车键则执行登录方法
+    	$('input.username,input.password,input.verify').on('keyup',function(event){
+    		//回车键的keyCode为13
+    		if(event.keyCode == 13){
+    			login.login();
+    		}
+    	});
     });
 	
 	var login = {
