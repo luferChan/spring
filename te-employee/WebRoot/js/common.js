@@ -86,6 +86,39 @@ $(function(){
 		return data.head;
 	};
 	
+	$.getMenu = function(){
+		var ul = $('ul.nav-list').empty();
+		$.post('./mgr/0/getMenu',function(data){
+			if(!$.isSuccess(data)){
+				return;
+			}
+			$.each(data.body, function(index,value){
+				
+				if(value.level != 0){
+					return;
+				} 
+				$("<li class='dropdown'></li>").append($("<a href='#' class='dropdown-toggle' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'></a>")
+						.append(value.name).append("<span class='caret'></span>"))
+						.append($.subMenu(data.body, value.code)).appendTo(ul);
+				
+			});
+		});
+	};
+	
+	$.subMenu = function(data,code){
+		
+		var ul = $("<ul class='dropdown-menu'></ul>");
+		if(!data || !code){
+			return;
+		}
+		
+		$.each(data, function(i,v){
+			if(v.level != 1 || v.superCode != code) return;
+			$("<li></li>").append($("<a href='"+v.page+"''></a>").append(v.name)).appendTo(ul);
+		});
+		return ul;
+	};
+	
 	
 	$.verify = true;
 	

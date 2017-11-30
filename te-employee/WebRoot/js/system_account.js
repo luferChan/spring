@@ -1,3 +1,6 @@
+$(function(){
+	$.getMenu();
+});
 
 var account = {
 	'showRoleModal' : function(){

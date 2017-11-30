@@ -7,7 +7,8 @@ $(function(){
 	$('button.btn-saveORmodify').on('click',function(){
 		var data = getEmployeeInfo(); //获取并验证表单中的所有数据
 	});
-	
+	//获取顶级导航菜单
+	$.getMenu();
 });
 
 //验证页面中的所有表单，并将最终的数据封装为一个JSON对象返回
