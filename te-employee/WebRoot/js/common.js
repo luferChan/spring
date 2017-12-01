@@ -7,6 +7,14 @@ var Dialog = {
 		}).open();
 	},
 	
+	success : function(text){
+		new BootstrapDialog({
+			title : "操作成功",
+			message : text,
+			type : BootstrapDialog.TYPE_SUCCESS
+		}).open();
+	},
+	
 	confirm : function(text,callback){
 		new BootstrapDialog({
 			title : "确认框",
