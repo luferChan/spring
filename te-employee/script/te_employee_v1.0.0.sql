@@ -48,3 +48,16 @@ INSERT INTO `te_module` VALUES (NULL, NOW(),'职位管理','03002','03','company
 INSERT INTO `te_module` VALUES (NULL, NOW(),'权限管理','04','0',NULL,0);
 INSERT INTO `te_module` VALUES (NULL, NOW(),'帐号管理','04001','04','system_account.html',1);
 INSERT INTO `te_module` VALUES (NULL, NOW(),'角色管理','04002','04','system_role.html',1);
+
+/** 新增部门模块数据表*/
+DROP TABLE IF EXISTS `te_department`
+CREATE TABLE `te_department` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `timestamp` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '乐观锁-时间戳',
+  `creatTime` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '创建时间',
+  `creator` varchar(128) DEFAULT NULL COMMENT '创建者',
+  `state` int(3) DEFAULT NULL COMMENT '状态',
+  `name` varchar(512) DEFAULT NULL COMMENT '部门名称',
+  `descrition` varchar(1024) DEFAULT NULL COMMENT '部门描述',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

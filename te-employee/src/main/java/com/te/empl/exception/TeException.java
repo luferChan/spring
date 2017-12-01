@@ -14,7 +14,7 @@ import com.te.empl.support.JSONReturn;
 public class TeException implements Serializable{
 
 	/**
-	 *   全局异常捕获
+	 *   Spring MVC 全局异常捕获
 	 */
 	private static final long serialVersionUID = 3778556703129692205L;
 	
