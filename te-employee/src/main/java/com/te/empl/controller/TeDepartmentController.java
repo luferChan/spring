@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.te.empl.service.TeDepartmentService;
@@ -26,8 +27,20 @@ public class TeDepartmentController extends AbstractController implements Serial
 	
 	@ResponseBody
 	@RequestMapping(value = "/add")
-	public JSONReturn addDepartment(String name,String description,HttpServletRequest request){
+	public JSONReturn addDepartment(@RequestParam String name,@RequestParam String description,HttpServletRequest request){
 		return teDepartmentService.addDepartment(name,description,acctName(request));
+	}
+	/**
+	 * 
+	 * @param search_name  搜索关键字
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/findDepartmentList")
+	public JSONReturn findDepartmentList(@RequestParam String search_name, @RequestParam int page,HttpServletRequest request){
+		return teDepartmentService.findDepartmentList(search_name,page,acctName(request));
 	}
 	
 }
