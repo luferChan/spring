@@ -31,7 +31,7 @@ public class TeDepartmentController extends AbstractController implements Serial
 		return teDepartmentService.addDepartment(name,description,acctName(request));
 	}
 	/**
-	 * 
+	 *  获得部门数据列表
 	 * @param search_name  搜索关键字
 	 * @param page
 	 * @param request
@@ -42,5 +42,16 @@ public class TeDepartmentController extends AbstractController implements Serial
 	public JSONReturn findDepartmentList(@RequestParam String search_name, @RequestParam int page,HttpServletRequest request){
 		return teDepartmentService.findDepartmentList(search_name,page,acctName(request));
 	}
-	
+	/**
+	 *  获取部门数据分页
+	 * @param search_name
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/findDepartmentPage")
+	public JSONReturn findDepartmentPage(@RequestParam String search_name, @RequestParam int page,HttpServletRequest request){
+		return teDepartmentService.findDepartmentPage(search_name,page,acctName(request));
+	}
 }

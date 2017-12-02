@@ -17,7 +17,7 @@ public class TeDepartmentDao extends AbstractDao<TeDepartment> implements Serial
 	 * 
 	 */
 	private static final long serialVersionUID = 8956575292104244432L;
-
+	String query = "";
 	@Override
 	public Class<TeDepartment> getEntityClass() {
 		// TODO Auto-generated method stub
@@ -27,7 +27,7 @@ public class TeDepartmentDao extends AbstractDao<TeDepartment> implements Serial
 	@SuppressWarnings("unchecked")
 	public List<TeDepartment> findDepartmentList(String search_name, int page,
 			int line) {
-		String query = "";
+		
 		if(StringUtils.isEmpty(search_name)){
 			query = "from TeDepartment order by id desc";
 			return findSession().createQuery(query).setFirstResult((page-1)*line).setMaxResults(page*line).list();
@@ -37,5 +37,16 @@ public class TeDepartmentDao extends AbstractDao<TeDepartment> implements Serial
 		query = "from TeDepartment where name like ? order by id desc";
 		return findSession().createQuery(query).setString(0, QueryUtil.packLink(search_name))
 				.setFirstResult((page-1)*line).setMaxResults(page*line).list();
+	}
+
+	public int findDepartmentPage(String search_name) {
+		// TODO Auto-generated method stub
+		if(StringUtils.isEmpty(search_name)){
+			query = "select count(id) from TeDepartment";
+			return Integer.parseInt(findSession().createQuery(query).uniqueResult().toString());
+		}
+		query = "select count(id) from TeDepartment where name like ? ";
+		
+		return Integer.parseInt(findSession().createQuery(query).setString(0, QueryUtil.packLink(search_name)).uniqueResult().toString());
 	}
 }

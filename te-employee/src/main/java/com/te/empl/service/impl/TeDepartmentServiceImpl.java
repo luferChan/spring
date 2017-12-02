@@ -25,6 +25,7 @@ import com.te.empl.service.TeDepartmentService;
 import com.te.empl.support.JSONReturn;
 import com.te.empl.utils.DateTimeUtil;
 import com.te.empl.utils.Logable;
+import com.te.empl.utils.PageUtil;
 
 
 @Service
@@ -66,5 +67,13 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 		
 		return JSONReturn.buildSuccess(dpmList);
 	}
-	
+	@Override
+	@Transactional
+	public JSONReturn findDepartmentPage(String search_name, int page,
+			String acctName) {
+		// TODO Auto-generated method stub
+		int count = teDepartmentDao.findDepartmentPage(search_name);
+		
+		return JSONReturn.buildSuccess(PageUtil.pack(PageConstant.DEFAULT_LINE, count, page));
+	}
 }

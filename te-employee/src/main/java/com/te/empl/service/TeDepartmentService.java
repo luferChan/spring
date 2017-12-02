@@ -9,4 +9,7 @@ public interface TeDepartmentService {
 	public abstract JSONReturn findDepartmentList(String search_name, int page,
 			String acctName);
 
+	public abstract JSONReturn findDepartmentPage(String search_name, int page,
+			String acctName);
+
 }
