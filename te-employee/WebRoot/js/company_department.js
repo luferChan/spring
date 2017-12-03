@@ -5,13 +5,17 @@ $(function(){
 });
 
 var depm = {
-		
+	currentID : 0,	
 	init : function(){
 		$('button.btn-newDept').on('click',function(){
 			depm.showAddBox();
 		});
 		$('button.btn-save').on('click',function(e){
 			depm.save();
+			depm.initPagy();
+		});
+		$('button.btn-modify').on('click',function(e){
+			depm.modify();
 			depm.initPagy();
 		});
 		$('button.btn-search').on('click',function(e){
@@ -43,11 +47,33 @@ var depm = {
 			return ;
 		}
 		
-		$.post('./mgr/0/department/add',{name : depName, description : depDesc },function(data){
+		$.post('./mgr/0/department/add',{ name : depName, description : depDesc },function(data){
 			Dialog.hideModal('#createDeptModal');
 			if(!$.isSuccess(data)) return;
 			Dialog.success(data.body);
 		});
+	},
+	
+	modify : function(){
+		$.verify = true;
+		var modifyName = $.verifyForm('input.modify-name-input');
+		var modifyDesc = $('textarea.modify-desc-text').val();
+		var id = depm.currentID;
+		if($.verify == false){
+			return ;
+		}
+		
+		$.post('./mgr/0/department/updateDepartment',
+			{
+				id : id,
+				name : modifyName, 
+				description : modifyDesc 
+			},
+			function(data){
+				Dialog.hideModal('#modifyDeptModal');
+				if(!$.isSuccess(data)) return;
+				Dialog.success(data.body);
+			});
 	},
 	
 	cleanMsg : function(){
@@ -64,7 +90,7 @@ var depm = {
 					
 				},function(data){
 					if(!$.isSuccess(data)) return;
-					console.log(data.body);
+					//console.log(data.body);
 					$.each(data.body,function(index,value){
 						$('<tr></tr>')
 						.append($("<td></td>").append(value.id))
@@ -102,9 +128,18 @@ var depm = {
 		});
 	},
 	
+	editDepartment : function(id,index){
+		if(!id) return;		
+		var tbodyArray =  $('tbody.tbody-list').find('tr').eq(index).find('td');		
+		Dialog.showModal('#modifyDeptModal');
+		$('input.modify-name-input').val(tbodyArray[1].textContent);
+		$('textarea.modify-desc-text').val(tbodyArray[4].textContent);
+		depm.currentID = id;
+	},
+	
 	getBtns : function(index,value){
 		var btns = "";
-		btns += "<button type='button' class='btn btn-primary btn-xs'><span class='glyphicon glyphicon-check' aria-hidden='true'></span>&nbsp;编辑</button>";
+		btns += "<button type='button' class='btn btn-primary btn-xs' onclick=depm.editDepartment("+value.id+","+index+")><span class='glyphicon glyphicon-check' aria-hidden='true'></span>&nbsp;编辑</button>";
 		btns += "<button type='button' class='btn btn-danger btn-xs' onclick=depm.deleteDepartment("+value.id+")><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>&nbsp;删除</button>";
 		return btns;
 	},

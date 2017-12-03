@@ -85,22 +85,42 @@
    	  
    	     
       <div class="container foot-container"> 开发者 - lufer -<a href="http://weibo.com/yelingfei"> 新浪微博</a></div>
-      	<div class="modal fade" id="createDeptModal" tabindex="-1" role="dialog" aria-labelledby="createDeptModalLabel">
-	  <div class="modal-dialog" role="document" style="width: 420px">
-	    <div class="modal-content login-modal-content">
-	      <div class="modal-header  login-modal-header">        
-	        <h4 class="modal-title" id="myModalLabel">新增部门信息</h4>
-	      </div>
-	      <div class="modal-body">
-				<input type="text" class="form-control dep-name-input" id="exampleInputEmail1" placeholder="部门名称">
-				<textarea class="form-control margin_top_10 dep-desc-text" rows="2" placeholder="部门描述"></textarea>	  	
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-	        <button type="button" class="btn btn-primary btn-save">确认</button>
-	      </div>
-	    </div>
-	  </div>
+	<!-- 新增部门信息模态框 -->
+	<div class="modal fade" id="createDeptModal" tabindex="-1" role="dialog" aria-labelledby="createDeptModalLabel">
+		<div class="modal-dialog" role="document" style="width: 420px">
+			<div class="modal-content login-modal-content">
+				<div class="modal-header  login-modal-header">        
+					<h4 class="modal-title" id="myModalLabel">新增部门信息</h4>
+				</div>
+				<div class="modal-body">
+					<input type="text" class="form-control dep-name-input" id="exampleInputEmail1" placeholder="部门名称">
+					<textarea class="form-control margin_top_10 dep-desc-text" rows="2" placeholder="部门描述"></textarea>	  	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-save">确认</button>
+				</div>
+			</div>
+		</div>
 	</div>
+	<!-- 修改部门信息模态框 -->
+	<div class="modal fade" id="modifyDeptModal" tabindex="-1" role="dialog" aria-labelledby="modifyDeptModalLabel">
+		<div class="modal-dialog" role="document" style="width: 420px">
+			<div class="modal-content login-modal-content">
+				<div class="modal-header  login-modal-header">        
+					<h4 class="modal-title" id="myModalLabel">修改部门信息</h4>
+				</div>
+				<div class="modal-body">
+					<input type="text" class="form-control modify-name-input" id="exampleInputEmail1" placeholder="部门名称">
+					<textarea class="form-control margin_top_10 modify-desc-text" rows="2" placeholder="部门描述"></textarea>	  	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-modify">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		
   </body>
 </html>

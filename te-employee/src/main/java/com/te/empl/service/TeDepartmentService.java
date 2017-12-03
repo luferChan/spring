@@ -14,4 +14,7 @@ public interface TeDepartmentService {
 
 	public abstract JSONReturn deleteDepartment(Long id, String acctName);
 
+	public abstract JSONReturn updateDepartment(Long id, String name,
+			String description, String acctName);
+
 }

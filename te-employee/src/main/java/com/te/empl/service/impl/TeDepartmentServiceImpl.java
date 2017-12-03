@@ -88,7 +88,7 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 		// TODO Auto-generated method stub
 		info("{}正在删除部门信息，ID号为{}",acctName,id);
 		TeDepartment teDepartment = teDepartmentDao.findById(id);
-		if(teDepartment == null || teDepartment.getState()== TeDepartmentState.delete.getState()){
+		if(teDepartment == null || teDepartment.getState() == TeDepartmentState.delete.getState()){
 			error("\t失败，数据源不存在。ID号为{}",id);
 			return JSONReturn.buildFailure("删除失败，该部门的数据源不存在！");
 		}
@@ -96,5 +96,24 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 		info("删除部门成功！");
 		teDepartmentDao.update(teDepartment);
 		return JSONReturn.buildSuccess("删除部门成功！");
+	}
+	
+	@Override
+	@Transactional
+	public JSONReturn updateDepartment(Long id, String name,
+			String description, String acctName) {
+		// TODO Auto-generated method stub
+		info("{}正在修改部门信息，ID号为{}",acctName,id);
+		TeDepartment teDepartment = teDepartmentDao.findById(id);
+		if(teDepartment == null || teDepartment.getState() == TeDepartmentState.delete.getState()){
+			return JSONReturn.buildFailure("修改失败，该部门数据不存在！");
+		}
+		if(teDepartment.getName().equals(name) && teDepartment.getDescrition().equals(description)){
+			return JSONReturn.buildFailure("修改失败，输入值与原数据一致！");
+		}
+		teDepartment.setName(name);
+		teDepartment.setDescrition(description);
+		teDepartmentDao.update(teDepartment);
+		return JSONReturn.buildSuccess("修改部门信息成功！");
 	}
 }

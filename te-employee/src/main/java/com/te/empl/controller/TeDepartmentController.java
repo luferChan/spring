@@ -44,8 +44,8 @@ public class TeDepartmentController extends AbstractController implements Serial
 	}
 	/**
 	 *  获取部门数据分页
-	 * @param search_name
-	 * @param page
+	 * @param search_name   搜索关键字
+	 * @param page  当前页码
 	 * @param request
 	 * @return
 	 */
@@ -64,5 +64,18 @@ public class TeDepartmentController extends AbstractController implements Serial
 	@RequestMapping(value = "/deleteDepartment")
 	public JSONReturn deleteDepartment(@RequestParam Long id, HttpServletRequest request){
 		return teDepartmentService.deleteDepartment(id,acctName(request));
+	}
+	/**
+	 *  修改部门信息
+	 * @param id
+	 * @param name  部门名称 
+	 * @param description  部门描述
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/updateDepartment")
+	public JSONReturn updateDepartment(@RequestParam Long id,@RequestParam String name,@RequestParam String description, HttpServletRequest request){
+		return teDepartmentService.updateDepartment(id,name,description, acctName(request));
 	}
 }
