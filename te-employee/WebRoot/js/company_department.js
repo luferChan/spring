@@ -10,14 +10,15 @@ var depm = {
 		$('button.btn-newDept').on('click',function(){
 			depm.showAddBox();
 		});
+		// 新增部门信息
 		$('button.btn-save').on('click',function(e){
 			depm.save();
-			depm.initPagy();
 		});
+		// 修改部门信息
 		$('button.btn-modify').on('click',function(e){
-			depm.modify();
-			depm.initPagy();
+			depm.modify();	
 		});
+		// 点击搜索监听事件
 		$('button.btn-search').on('click',function(e){
 			depm.initPagy();
 		});
@@ -49,8 +50,10 @@ var depm = {
 		
 		$.post('./mgr/0/department/add',{ name : depName, description : depDesc },function(data){
 			Dialog.hideModal('#createDeptModal');
+			depm.initPagy();
 			if(!$.isSuccess(data)) return;
 			Dialog.success(data.body);
+			
 		});
 	},
 	
@@ -71,8 +74,10 @@ var depm = {
 			},
 			function(data){
 				Dialog.hideModal('#modifyDeptModal');
+				depm.initPagy();
 				if(!$.isSuccess(data)) return;
 				Dialog.success(data.body);
+				
 			});
 	},
 	

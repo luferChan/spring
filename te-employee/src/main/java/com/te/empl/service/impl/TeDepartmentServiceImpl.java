@@ -43,6 +43,8 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 			error("\t新增部门信息失败，输入的部门名称name为空，操作者为{}",acctName);
 			return JSONReturn.buildFailure("部门名称为空...");
 		}
+
+		
 		TeDepartment teDepartment = new TeDepartment(DateTimeUtil.getCurrentTime(), acctName, TeDepartmentState.normal.getState(), name, description);
 		teDepartmentDao.save(teDepartment);
 		info("\t新增部门信息成功，部门信息为：{}",teDepartment.toString());
@@ -104,16 +106,23 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 			String description, String acctName) {
 		// TODO Auto-generated method stub
 		info("{}正在修改部门信息，ID号为{}",acctName,id);
+		if(StringUtils.isEmpty(name)){
+			error("\t{}进行了非法操作，部门名称为空！",acctName);
+			return JSONReturn.buildFailure("非法操作，部门名称为空！");
+		}
 		TeDepartment teDepartment = teDepartmentDao.findById(id);
 		if(teDepartment == null || teDepartment.getState() == TeDepartmentState.delete.getState()){
+			error("\t修改失败，部门：{}数据不存在...",name);
 			return JSONReturn.buildFailure("修改失败，该部门数据不存在！");
 		}
 		if(teDepartment.getName().equals(name) && teDepartment.getDescrition().equals(description)){
+			error("\t修改失败，输入值与原数据一致...");
 			return JSONReturn.buildFailure("修改失败，输入值与原数据一致！");
 		}
 		teDepartment.setName(name);
 		teDepartment.setDescrition(description);
 		teDepartmentDao.update(teDepartment);
-		return JSONReturn.buildSuccess("修改部门信息成功！");
+		info("{}修改部门信息成功！");
+		return JSONReturn.buildSuccess("");
 	}
 }
