@@ -12,4 +12,6 @@ public interface TeDepartmentService {
 	public abstract JSONReturn findDepartmentPage(String search_name, int page,
 			String acctName);
 
+	public abstract JSONReturn deleteDepartment(Long id, String acctName);
+
 }

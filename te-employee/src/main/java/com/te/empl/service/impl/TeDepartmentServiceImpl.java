@@ -50,7 +50,7 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 	}
 	
 	@Override
-	@Transactional
+	
 	public JSONReturn findDepartmentList(String search_name, int page,
 			String acctName) {
 		// 1.从数据库中将数据查询出来
@@ -62,18 +62,39 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 		// 2.通过dto对数据列表进行转换
 		List<TeDepartmentDto> dpmList = new ArrayList<TeDepartmentDto>();
 		for(TeDepartment dp : departments){
+			
 			dpmList.add(new TeDepartmentDto(dp.getId(), dp.getName(), dp.getCreator(), DateTimeUtil.dateToString(dp.getCreatTime(), TimeFormatConstant.YYYY_MM_DD), dp.getDescrition()));
+			
 		}
 		
 		return JSONReturn.buildSuccess(dpmList);
 	}
 	@Override
-	@Transactional
+	
 	public JSONReturn findDepartmentPage(String search_name, int page,
 			String acctName) {
 		// TODO Auto-generated method stub
 		int count = teDepartmentDao.findDepartmentPage(search_name);
 		
 		return JSONReturn.buildSuccess(PageUtil.pack(PageConstant.DEFAULT_LINE, count, page));
+	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	@Transactional
+	public JSONReturn deleteDepartment(Long id, String acctName) {
+		// TODO Auto-generated method stub
+		info("{}正在删除部门信息，ID号为{}",acctName,id);
+		TeDepartment teDepartment = teDepartmentDao.findById(id);
+		if(teDepartment == null || teDepartment.getState()== TeDepartmentState.delete.getState()){
+			error("\t失败，数据源不存在。ID号为{}",id);
+			return JSONReturn.buildFailure("删除失败，该部门的数据源不存在！");
+		}
+		teDepartment.setState(TeDepartmentState.delete.getState());
+		info("删除部门成功！");
+		teDepartmentDao.update(teDepartment);
+		return JSONReturn.buildSuccess("删除部门成功！");
 	}
 }

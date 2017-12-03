@@ -54,4 +54,15 @@ public class TeDepartmentController extends AbstractController implements Serial
 	public JSONReturn findDepartmentPage(@RequestParam String search_name, @RequestParam int page,HttpServletRequest request){
 		return teDepartmentService.findDepartmentPage(search_name,page,acctName(request));
 	}
+	/**
+	 * 删除部门
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/deleteDepartment")
+	public JSONReturn deleteDepartment(@RequestParam Long id, HttpServletRequest request){
+		return teDepartmentService.deleteDepartment(id,acctName(request));
+	}
 }

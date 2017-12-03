@@ -94,6 +94,32 @@ $(function(){
 		return data.head;
 	};
 	
+	//设置分页
+	$.currentPage = 0;
+	$.setPage = function(data,method){
+		$("#pagination").pagy({
+		    currentPage: data.current,
+		    totalPages: data.total,
+		    innerWindow: 2,
+		    outerWindow: 0,
+		    first: '«',
+		    prev: '‹',
+		    next: '›',
+		    last: '»',
+		    gap: '..',
+		    truncate: false,
+		    page: function(page) { 
+		    	if($.currentPage == page){
+		    		return false; //当点击当前页时，不向后台重复请求查询数据
+		    	}	
+		    	$.currentPage = page;
+		    	
+		    	method(page);
+		    	return true ;
+		    }
+		});
+	};
+	//获取顶级导航菜单
 	$.getMenu = function(){
 		var ul = $('ul.nav-list').empty();
 		$.post('./mgr/0/getMenu',function(data){
@@ -112,7 +138,7 @@ $(function(){
 			});
 		});
 	};
-	
+	// 子菜单
 	$.subMenu = function(data,code){
 		
 		var ul = $("<ul class='dropdown-menu'></ul>");
@@ -142,7 +168,7 @@ $(function(){
 	};
 })(jQuery);
 
-
+// 日期选择器
 function InitWdatePicker(){
 	WdatePicker();
 }
