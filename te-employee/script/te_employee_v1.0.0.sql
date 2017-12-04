@@ -61,3 +61,17 @@ CREATE TABLE `te_department` (
   `descrition` varchar(1024) DEFAULT NULL COMMENT '部门描述',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/** 新增职位模块数据表*/
+DROP TABLE IF EXISTS `te_position`;
+CREATE TABLE `te_position` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+	`timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+	`createTime` datetime DEFAULT NULL COMMENT '添加时间',
+	`creator` varchar(64) DEFAULT NULL COMMENT '操作人',
+	`state` INT(5) DEFAULT 0 COMMENT '状态 -1删除，0正常',
+  `department` bigint(20) NOT NULL DEFAULT 0 COMMENT '所属部门',
+  `name` varchar(128) DEFAULT NULL COMMENT '职位名称',
+  `description` varchar(1024) DEFAULT NULL COMMENT '职位简介',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
