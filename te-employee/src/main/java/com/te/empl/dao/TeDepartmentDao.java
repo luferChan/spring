@@ -14,9 +14,7 @@ import com.te.empl.utils.QueryUtil;
 @Repository
 public class TeDepartmentDao extends AbstractDao<TeDepartment> implements Serializable{
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 8956575292104244432L;
 	String query = "";
 	@Override
