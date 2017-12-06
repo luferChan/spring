@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.te.empl.constant.db.TeDepartmentState;
 import com.te.empl.dao.support.AbstractDao;
+import com.te.empl.dto.TeSelectDto;
 import com.te.empl.model.TeDepartment;
 import com.te.empl.utils.QueryUtil;
 
@@ -19,7 +20,7 @@ public class TeDepartmentDao extends AbstractDao<TeDepartment> implements Serial
 	String query = "";
 	@Override
 	public Class<TeDepartment> getEntityClass() {
-		// TODO Auto-generated method stub
+		
 		return TeDepartment.class;
 	}
 
@@ -47,5 +48,12 @@ public class TeDepartmentDao extends AbstractDao<TeDepartment> implements Serial
 		query = "select count(id) from TeDepartment where name like ? and state = ?";
 		
 		return Integer.parseInt(findSession().createQuery(query).setString(0, QueryUtil.packLink(search_name)).setInteger(1, TeDepartmentState.normal.getState()).uniqueResult().toString());
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TeSelectDto> getSelectDepartment() {
+		
+		String query = "select new com.te.empl.dto.TeSelectDto(id,name) from TeDepartment where state = ?";
+		return findSession().createQuery(query).setInteger(0, TeDepartmentState.normal.getState()).list();
 	}
 }

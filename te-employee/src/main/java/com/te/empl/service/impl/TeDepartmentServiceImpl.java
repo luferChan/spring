@@ -20,6 +20,7 @@ import com.te.empl.constant.TimeFormatConstant;
 import com.te.empl.constant.db.TeDepartmentState;
 import com.te.empl.dao.TeDepartmentDao;
 import com.te.empl.dto.TeDepartmentDto;
+import com.te.empl.dto.TeSelectDto;
 import com.te.empl.model.TeDepartment;
 import com.te.empl.service.TeDepartmentService;
 import com.te.empl.support.JSONReturn;
@@ -124,5 +125,14 @@ public class TeDepartmentServiceImpl extends Logable implements TeDepartmentServ
 		teDepartmentDao.update(teDepartment);
 		info("{}修改部门信息成功！");
 		return JSONReturn.buildSuccess("");
+	}
+	
+	/**
+	 *  获得下拉菜单中的部门数据列表
+	 */
+	@Override
+	public JSONReturn getSelectDepartment() {
+		
+		return JSONReturn.buildSuccess(teDepartmentDao.getSelectDepartment());
 	}
 }

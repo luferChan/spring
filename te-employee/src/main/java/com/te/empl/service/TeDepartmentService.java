@@ -16,5 +16,11 @@ public interface TeDepartmentService {
 
 	public abstract JSONReturn updateDepartment(Long id, String name,
 			String description, String acctName);
+	
+	/**
+	 * 获得部门数据列表的下拉菜单
+	 * @return
+	 */
+	public abstract JSONReturn getSelectDepartment();
 
 }

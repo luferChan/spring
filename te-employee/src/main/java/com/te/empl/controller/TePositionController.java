@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.te.empl.service.TeDepartmentService;
 import com.te.empl.service.TePositionService;
 import com.te.empl.support.JSONReturn;
 
@@ -18,8 +19,11 @@ import com.te.empl.support.JSONReturn;
 public class TePositionController extends AbstractController implements Serializable{
 
 	private static final long serialVersionUID = 3171739692776643217L;
+	
 	@Autowired
 	private TePositionService tePositionService;
+	@Autowired
+	private TeDepartmentService teDepartmentService;
 	
 	/**
 	 * 
@@ -35,5 +39,13 @@ public class TePositionController extends AbstractController implements Serializ
 		return tePositionService.addPosition(departmentId,name,description,acctName(request));
 	}
 	
-	
+	/**
+	 *  获取下拉菜单的部门列表
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getSelectDepartment")
+	public JSONReturn getSelectDepartment(){
+		return teDepartmentService.getSelectDepartment();
+	}
 }
