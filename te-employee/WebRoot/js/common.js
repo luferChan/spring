@@ -160,7 +160,18 @@ $(function(){
 	$.verifyForm = function(classname,isNull){
 		$(classname).removeClass('border-red');
 		var val =  $(classname).val();
+		if(isNull) return val;
 		if(val == null || val == "" || val.length<=0){
+			$.verify = false;
+			$(classname).addClass('border-red');
+		}
+		return val;
+	};
+	$.verifySelect = function(classname,isNull){
+		$(classname).removeClass('border-red');
+		var val =  $(classname).val();
+		if(isNull) return val;
+		if(val == null || val == -1 ){
 			$.verify = false;
 			$(classname).addClass('border-red');
 		}

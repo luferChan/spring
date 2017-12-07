@@ -1,7 +1,9 @@
 $(function(){
 	$.getMenu();
 	position.init();
-	
+	$('button.btn-confirm-posi').on('click',function(){
+		position.save();
+	});
 });
 
 var position = {
@@ -18,7 +20,9 @@ var position = {
 	},
 	
 	getSelectDepartment : function(){
-		var select = $('select.add-posi-select').empty().append($('<option value="0"></option>').append("请选择部门..."));
+		$('input.add-posi-input,textarea.add-posi-text').val("");
+		
+		var select = $('select.add-posi-select').empty().append($('<option value="-1"></option>').append("请选择部门..."));
 		$.post('./mgr/0/position/getSelectDepartment',
 				{
 				
@@ -30,5 +34,17 @@ var position = {
 					});
 			
 				});
+	},
+	
+	save : function(){
+		$.verify = true;
+		var department = $.verifySelect('select.add-posi-select',false);
+		var name = $.verifyForm('input.add-posi-input',false);
+		var description = $.verifyForm('textarea.add-posi-text',true);
+			
+		if($.verify == false){
+			return ;
+		}
+		
 	},
 };

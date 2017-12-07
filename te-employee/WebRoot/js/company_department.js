@@ -42,8 +42,9 @@ var depm = {
 
 	save : function(){
 		$.verify = true;
-		var depName = $.verifyForm('input.dep-name-input');
-		var depDesc = $('textarea.dep-desc-text').val();
+		var depName = $.verifyForm('input.dep-name-input',false);
+		var depDesc = $.verifyForm('textarea.dep-desc-text',true);
+			
 		if($.verify == false){
 			return ;
 		}
@@ -59,8 +60,9 @@ var depm = {
 	
 	modify : function(){
 		$.verify = true;
-		var modifyName = $.verifyForm('input.modify-name-input');
-		var modifyDesc = $('textarea.modify-desc-text').val();
+		var modifyName = $.verifyForm('input.modify-name-input',false);
+		var modifyDesc = $.verifyForm('textarea.modify-desc-text',true);
+			
 		var id = depm.currentID;
 		if($.verify == false){
 			return ;
