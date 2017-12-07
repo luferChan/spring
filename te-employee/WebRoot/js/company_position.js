@@ -1,9 +1,6 @@
 $(function(){
 	$.getMenu();
 	position.init();
-	$('button.btn-confirm-posi').on('click',function(){
-		position.save();
-	});
 });
 
 var position = {
@@ -12,6 +9,10 @@ var position = {
 		$('button.btn-newPosition').on('click',function(e){
 			position.showAddBox();
 		});
+		
+		$('button.btn-confirm-posi').on('click',function(){
+			position.save();
+		});
 	},
 	
 	showAddBox : function(){
@@ -19,6 +20,7 @@ var position = {
 		Dialog.showModal('#addPosiModal');
 	},
 	
+	// 获得下拉菜单的部门数据列表
 	getSelectDepartment : function(){
 		$('input.add-posi-input,textarea.add-posi-text').val("");
 		
@@ -36,6 +38,7 @@ var position = {
 				});
 	},
 	
+	// 新增职位信息方法
 	save : function(){
 		$.verify = true;
 		var department = $.verifySelect('select.add-posi-select',false);
@@ -45,6 +48,18 @@ var position = {
 		if($.verify == false){
 			return ;
 		}
-		
+		console.log(department);
+		$.post('./mgr/0/position/addPosition',
+				{
+					departmentId : department,
+					name : name,
+					description : description
+				},function(data){
+					if(!$.isSuccess(data)) return;
+					Dialog.success(data.body);
+			
+				});
 	},
+	
+	// 职位信息数据列表的展示
 };
