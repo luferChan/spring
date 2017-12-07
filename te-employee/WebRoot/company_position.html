@@ -69,7 +69,7 @@
 			      </div>
 			    </div>
 		  </div>
-		  <div class="col-md-2 text_align_right" ><button type="button" class="btn btn-primary btn-newInfo"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增职位</button></div>
+		  <div class="col-md-2 text_align_right" ><button type="button" class="btn btn-primary btn-newPosition"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 新增职位</button></div>
 		</div>
 		<table class="table table-bordered table-hover table_control">
 			<thead>
@@ -92,6 +92,28 @@
    	  
    	     
       <div class="container foot-container"> 开发者 - lufer -<a href="http://weibo.com/yelingfei"> 新浪微博</a></div>
-      
+
+	<!-- 新增职位信息模态框 -->
+	<div class="modal fade" id="addPosiModal" tabindex="-1" role="dialog" aria-labelledby="addPosiModalLabel">
+		<div class="modal-dialog" role="document" style="width: 420px">
+			<div class="modal-content login-modal-content">
+				<div class="modal-header  login-modal-header">        
+					<h4 class="modal-title" id="myModalLabel">新增职位信息</h4>
+				</div>
+				<div class="modal-body">
+					<select class="form-control add-posi-select">
+						<option>请选择部门</option>
+					</select>
+					<input type="text" class="form-control modify-name-input margin_top_10" id="exampleInputEmail1" placeholder="职位名称">
+					<textarea class="form-control margin_top_10 modify-desc-text" rows="2" placeholder="职位描述"></textarea>	  	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-modify">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	      
   </body>
 </html>
