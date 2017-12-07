@@ -23,18 +23,11 @@ var position = {
 	// 获得下拉菜单的部门数据列表
 	getSelectDepartment : function(){
 		$('input.add-posi-input,textarea.add-posi-text').val("");
-		
-		var select = $('select.add-posi-select').empty().append($('<option value="-1"></option>').append("请选择部门..."));
-		$.post('./mgr/0/position/getSelectDepartment',
-				{
-				
-				},function(data){
+
+		$.post('./mgr/0/position/getSelectDepartment',{ },
+				function(data){
 					if(!$.isSuccess(data)) return;
-					//console.log(data.body);
-					$.each(data.body,function(index,value){
-						$("<option value="+value.id+"></option>").append(value.name).appendTo(select);
-					});
-			
+					$.echoSelect(data.body,'select.add-posi-select',-1);
 				});
 	},
 	
@@ -57,7 +50,7 @@ var position = {
 				},function(data){
 					if(!$.isSuccess(data)) return;
 					Dialog.success(data.body);
-			
+					Dialog.hideModal('#addPosiModal');
 				});
 	},
 	

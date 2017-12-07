@@ -153,6 +153,20 @@ $(function(){
 		return ul;
 	};
 	
+	// 获取下拉菜单 
+	$.echoSelect = function(data,id,selected){
+		var select = $(id).empty().append($('<option value="-1"></option>').append("请选择..."));
+		$.each(data,function(index,value){
+			if(value.id == selected){
+				$("<option value="+value.id+" selected=true></option>").append(value.name).appendTo(select);
+			}
+			else{
+				$("<option value="+value.id+"></option>").append(value.name).appendTo(select);
+			}
+			
+		});
+	};
+	
 	
 	$.verify = true;
 	
