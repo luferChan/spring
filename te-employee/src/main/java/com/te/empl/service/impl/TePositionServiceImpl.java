@@ -70,8 +70,7 @@ public class TePositionServiceImpl extends Logable implements TePositionService 
 		TeDepartment teDepartment = null;
 		for(TePosition pt : positions){
 			teDepartment = teDepartmentDao.findById(pt.getDepartment());
-			System.out.println(pt.getDepartment());
-			System.out.println(teDepartment);
+			
 			posList.add(new TePositionDto(pt.getId(), pt.getName(), DateTimeUtil.dateToString(pt.getCreateTime(), TimeFormatConstant.YYYY_MM_DD), pt.getCreator(), teDepartment.getName(), pt.getDescription()));
 		}
 		return JSONReturn.buildSuccess(posList);

@@ -13,7 +13,12 @@ var position = {
 		$('button.btn-confirm-posi').on('click',function(){
 			position.save();
 		});
+		$('button.btn-search-posi').on('click',function(){
+			position.getPositionList();
+		});
+		
 		position.getSearchSelectDepm();
+		position.getPositionList();
 	},
 	
 	showAddBox : function(){
@@ -31,7 +36,7 @@ var position = {
 					$.echoSelect(data.body,'select.add-posi-select',-1);
 				});
 	},
-	
+	// 获得查询下拉菜单的部门数据列表
 	getSearchSelectDepm : function(){
 		$('input.add-posi-input,textarea.add-posi-text').val("");
 
@@ -66,4 +71,27 @@ var position = {
 	},
 	
 	// 职位信息数据列表的展示
+	getPositionList : function(){
+		var search_name = $('input.posi-search').val();
+		var tbody = $('tbody.posi-tbody-list').empty();
+		$.post('./mgr/0/position/getPositionList',
+				{
+					search_name : search_name,
+					page : 1,
+					
+				},function(data){
+					if(!$.isSuccess(data)) return;
+					$.each(data.body,function(index,value){
+						$('<tr></tr>')
+						.append($('<td></td>').append(value.id))
+						.append($('<td></td>').append(value.name))
+						.append($('<td></td>').append(value.createTime))
+						.append($('<td></td>').append(value.creator))
+						.append($('<td></td>').append(value.department))
+						.append($('<td></td>').append(value.description))
+						.append($('<td></td>').append("")).appendTo(tbody);
+					});
+					
+				});
+	},
 };
