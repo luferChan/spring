@@ -6,4 +6,15 @@ public abstract interface TePositionService {
 
 	public abstract JSONReturn addPosition(Long departmentId, String name, String description,String acctName);
 	
+	
+	/**
+	 * 获取首页职位数据
+	 * @param acctName 
+	 * @param page 
+	 * @param search_name 
+	 * @param acctName 
+	 * @return
+	 */
+	public abstract JSONReturn getPositionList(String search_name, int page, String acctName);
+	
 }

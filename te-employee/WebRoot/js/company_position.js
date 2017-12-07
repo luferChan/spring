@@ -13,6 +13,7 @@ var position = {
 		$('button.btn-confirm-posi').on('click',function(){
 			position.save();
 		});
+		position.getSearchSelectDepm();
 	},
 	
 	showAddBox : function(){
@@ -28,6 +29,16 @@ var position = {
 				function(data){
 					if(!$.isSuccess(data)) return;
 					$.echoSelect(data.body,'select.add-posi-select',-1);
+				});
+	},
+	
+	getSearchSelectDepm : function(){
+		$('input.add-posi-input,textarea.add-posi-text').val("");
+
+		$.post('./mgr/0/position/getSelectDepartment',{ },
+				function(data){
+					if(!$.isSuccess(data)) return;
+					$.echoSelect(data.body,'select.select-depm',-1);
 				});
 	},
 	

@@ -1,14 +1,21 @@
 package com.te.empl.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.te.empl.constant.PageConstant;
+import com.te.empl.constant.TimeFormatConstant;
 import com.te.empl.constant.db.TeDepartmentState;
 import com.te.empl.constant.db.TePositionState;
 import com.te.empl.dao.TeDepartmentDao;
 import com.te.empl.dao.TePositionDao;
+import com.te.empl.dto.TePositionDto;
 import com.te.empl.model.TeDepartment;
 import com.te.empl.model.TePosition;
 import com.te.empl.service.TePositionService;
@@ -52,5 +59,21 @@ public class TePositionServiceImpl extends Logable implements TePositionService 
 		
 		return JSONReturn.buildSuccess("添加职位成功！");
 	}
-
+	
+	@Override
+	public JSONReturn getPositionList(String search_name, int page,String acctName) {
+		List<TePosition> positions = tePositionDao.getPositionList(search_name,page,PageConstant.DEFAULT_LINE);
+		if(CollectionUtils.isEmpty(positions)){
+			return JSONReturn.buildFailure("未获取到相关数据！");
+		}
+		List<TePositionDto> posList = new ArrayList<TePositionDto>();
+		TeDepartment teDepartment = null;
+		for(TePosition pt : positions){
+			teDepartment = teDepartmentDao.findById(pt.getDepartment());
+			System.out.println(pt.getDepartment());
+			System.out.println(teDepartment);
+			posList.add(new TePositionDto(pt.getId(), pt.getName(), DateTimeUtil.dateToString(pt.getCreateTime(), TimeFormatConstant.YYYY_MM_DD), pt.getCreator(), teDepartment.getName(), pt.getDescription()));
+		}
+		return JSONReturn.buildSuccess(posList);
+	}
 }
