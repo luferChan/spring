@@ -14,17 +14,19 @@ var position = {
 			position.save();
 		});
 		$('button.btn-search-posi').on('click',function(){
-			position.getPositionList();
+			position.getPositionList(1);
 		});
 		
 		position.getSearchSelectDepm();
-		position.getPositionList();
+		position.getPositionList(1);
 	},
 	
 	showAddBox : function(){
 		position.getSelectDepartment();
 		Dialog.showModal('#addPosiModal');
 	},
+	
+	dataList : null,
 	
 	// 获得下拉菜单的部门数据列表
 	getSelectDepartment : function(){
@@ -67,20 +69,24 @@ var position = {
 					if(!$.isSuccess(data)) return;
 					Dialog.success(data.body);
 					Dialog.hideModal('#addPosiModal');
+					position.getPositionList(1);
 				});
 	},
 	
 	// 职位信息数据列表的展示
-	getPositionList : function(){
+	getPositionList : function(page){
+		var dpmId = $('select.select-depm').val();
 		var search_name = $('input.posi-search').val();
 		var tbody = $('tbody.posi-tbody-list').empty();
 		$.post('./mgr/0/position/getPositionList',
 				{
+					departmentId : dpmId,
 					search_name : search_name,
-					page : 1,
+					page : page,
 					
 				},function(data){
 					if(!$.isSuccess(data)) return;
+					position.dataList = data.body;
 					$.each(data.body,function(index,value){
 						$('<tr></tr>')
 						.append($('<td></td>').append(value.id))

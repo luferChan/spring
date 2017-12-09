@@ -17,11 +17,7 @@
 	<script src="./js/common.js"></script>
 	<script src="./js/company_position.js"></script>
 	
-	<script type="text/javascript">
-		$('.search_dropdown li').on('click',function(e){	
-			$('.search_name').empty().append(e.target.text).append("&nbsp;<span class='caret'></span>");
-		});
-	</script>
+	
     <!--[if lt IE 9]>
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -58,7 +54,7 @@
 		<div class="row">
 		  <div class="col-md-10" >
 			  <select class="form-control select_control float_left margin_right select-depm">
-				  <option>请选择部门</option>
+				  <option value="-1">请选择部门...</option>
 			  </select>
 			  
 			    <div class="input-group input_width">

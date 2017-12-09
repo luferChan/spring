@@ -15,6 +15,6 @@ public abstract interface TePositionService {
 	 * @param acctName 
 	 * @return
 	 */
-	public abstract JSONReturn getPositionList(String search_name, int page, String acctName);
+	public abstract JSONReturn getPositionList(Long departmentId,String search_name, int page, String acctName);
 	
 }

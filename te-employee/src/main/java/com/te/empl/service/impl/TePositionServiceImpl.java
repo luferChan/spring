@@ -61,8 +61,8 @@ public class TePositionServiceImpl extends Logable implements TePositionService 
 	}
 	
 	@Override
-	public JSONReturn getPositionList(String search_name, int page,String acctName) {
-		List<TePosition> positions = tePositionDao.getPositionList(search_name,page,PageConstant.DEFAULT_LINE);
+	public JSONReturn getPositionList(Long departmentId,String search_name, int page,String acctName) {
+		List<TePosition> positions = tePositionDao.getPositionList(departmentId,search_name,page,PageConstant.DEFAULT_LINE);
 		if(CollectionUtils.isEmpty(positions)){
 			return JSONReturn.buildFailure("未获取到相关数据！");
 		}

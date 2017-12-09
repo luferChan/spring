@@ -27,15 +27,33 @@ public class TePositionDao extends AbstractDao<TePosition> implements Serializab
 		return TePosition.class;
 	}
 	@SuppressWarnings("unchecked")
-	public List<TePosition> getPositionList(String search_name, int page,
+	public List<TePosition> getPositionList(Long departmentId,String search_name, int page,
 			int line) {
+		StringBuffer query = new StringBuffer();
+		query.append("from TePosition where state = ? ");
+		// 判断查询条件前是否有选择部门
+		if(departmentId != -1){
+			query.append("and department = ? ");
+			if(StringUtils.isEmpty(search_name)){
+				
+				query.append(" order by id desc");
+				return findSession().createQuery(query.toString()).setInteger(0, TePositionState.normal.getState())
+						.setLong(1, departmentId).setFirstResult((page-1)*line).setMaxResults(page*line).list();
+			}
+			query.append("and name like ? order by id desc"); 
+			return findSession().createQuery(query.toString()).setInteger(0, TePositionState.normal.getState())
+					.setLong(1, departmentId).setString(2, QueryUtil.packLink(search_name)).setFirstResult((page-1)*line).setMaxResults(page*line).list();
+		}
+		
 		if(StringUtils.isEmpty(search_name)){
-			String query = "from TePosition where state = ? order by id desc";
-			return findSession().createQuery(query).setInteger(0, TePositionState.normal.getState())
+			
+			query.append(" order by id desc");
+			return findSession().createQuery(query.toString()).setInteger(0, TePositionState.normal.getState())
 					.setFirstResult((page-1)*line).setMaxResults(page*line).list();
 		}
 		
-		String query = "from TePosition where state = ? and name like ? order by id desc";
-		return findSession().createQuery(query).setInteger(0, TePositionState.normal.getState()).setString(1, QueryUtil.packLink(search_name)).setFirstResult((page-1)*line).setMaxResults(page*line).list();
+		query.append("and name like ? order by id desc"); 
+		return findSession().createQuery(query.toString()).setInteger(0, TePositionState.normal.getState())
+				.setString(1, QueryUtil.packLink(search_name)).setFirstResult((page-1)*line).setMaxResults(page*line).list();
 	}
 }

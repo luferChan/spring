@@ -51,8 +51,8 @@ public class TePositionController extends AbstractController implements Serializ
 	
 	@ResponseBody
 	@RequestMapping(value="/getPositionList")
-	public JSONReturn getPositionList(@RequestParam String search_name, @RequestParam int page,
+	public JSONReturn getPositionList(@RequestParam Long departmentId,@RequestParam String search_name, @RequestParam int page,
 			HttpServletRequest request){
-		return tePositionService.getPositionList(search_name,page,acctName(request));
+		return tePositionService.getPositionList(departmentId,search_name,page,acctName(request));
 	}
 }
