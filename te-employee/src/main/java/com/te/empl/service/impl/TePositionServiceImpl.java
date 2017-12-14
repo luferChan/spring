@@ -22,6 +22,7 @@ import com.te.empl.service.TePositionService;
 import com.te.empl.support.JSONReturn;
 import com.te.empl.utils.DateTimeUtil;
 import com.te.empl.utils.Logable;
+import com.te.empl.utils.PageUtil;
 
 @Service
 @Transactional(readOnly = true)
@@ -90,5 +91,12 @@ public class TePositionServiceImpl extends Logable implements TePositionService 
 		tePositionDao.update(tePosition);
 		info("删除职位成功！");
 		return JSONReturn.buildSuccess("删除职位成功！");
+	}
+	
+	@Override
+	public JSONReturn getPositionPage(Long departmentId, String search_name,
+			int page, String acctName) {
+		;
+		return JSONReturn.buildSuccess(PageUtil.pack(PageConstant.DEFAULT_LINE, tePositionDao.getPositionPage(departmentId,search_name), page));
 	}
 }

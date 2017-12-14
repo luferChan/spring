@@ -58,10 +58,32 @@ public class TePositionController extends AbstractController implements Serializ
 		return teDepartmentService.getSelectDepartment();
 	}
 	
+	/**
+	 * 获取职位数据列表
+	 * @param departmentId
+	 * @param search_name
+	 * @param page
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/getPositionList")
 	public JSONReturn getPositionList(@RequestParam Long departmentId,@RequestParam String search_name, @RequestParam int page,
 			HttpServletRequest request){
 		return tePositionService.getPositionList(departmentId,search_name,page,acctName(request));
+	}
+	/**
+	 * 获取分页信息
+	 * @param departmentId
+	 * @param search_name
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getPositionPage")
+	public JSONReturn getPositionPage(@RequestParam Long departmentId,@RequestParam String search_name, @RequestParam int page,
+			HttpServletRequest request){
+		return tePositionService.getPositionPage(departmentId,search_name,page,acctName(request));
 	}
 }

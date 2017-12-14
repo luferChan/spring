@@ -108,13 +108,13 @@ $(function(){
 		    last: '»',
 		    gap: '..',
 		    truncate: false,
-		    page: function(page) { 
-		    	if($.currentPage == page){
+		    page: function(clickPage) { 
+		    	if($.currentPage == clickPage){
 		    		return false; //当点击当前页时，不向后台重复请求查询数据
 		    	}	
-		    	$.currentPage = page;
+		    	$.currentPage = clickPage;
 		    	
-		    	method(page);
+		    	method(clickPage);
 		    	return true ;
 		    }
 		});

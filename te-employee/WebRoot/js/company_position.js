@@ -1,6 +1,7 @@
 $(function(){
 	$.getMenu();
 	position.init();
+	position.initPagy();
 });
 
 var position = {
@@ -14,11 +15,17 @@ var position = {
 			position.save();
 		});
 		$('button.btn-search-posi').on('click',function(){
-			position.getPositionList(1);
+			position.initPagy();
 		});
 		
 		position.getSearchSelectDepm();
+		
+		
+	},
+	
+	initPagy : function(){
 		position.getPositionList(1);
+		position.getPagy(1);
 	},
 	
 	showAddBox : function(){
@@ -49,6 +56,24 @@ var position = {
 				});
 	},
 	
+	getPagy : function(page){
+		$("#pagination ul").empty(); //每次调用时清空分页组件
+		
+		var dpmId = $('select.select-depm').val();
+		var search_name = $('input.posi-search').val();
+		
+		$.post('./mgr/0/position/getPositionPage',
+				{
+					departmentId : dpmId,
+					search_name : search_name,
+					page : page,
+					
+				},function(data){
+					$.setPage(data.body,position.getPositionList);
+				});
+	},
+	
+	
 	// 新增职位信息方法
 	save : function(){
 		$.verify = true;
@@ -68,8 +93,9 @@ var position = {
 				},function(data){
 					if(!$.isSuccess(data)) return;
 					Dialog.success(data.body);
+					position.initPagy();
 					Dialog.hideModal('#addPosiModal');
-					position.getPositionList(1);
+					
 				});
 	},
 	
@@ -119,7 +145,7 @@ var position = {
 			$.post('./mgr/0/position/deletePosition',{id : id},function(data){
 				if(!$.isSuccess) return;
 				Dialog.success(data.body);
-				position.init();
+				position.initPagy();
 			});
 		});
 	},

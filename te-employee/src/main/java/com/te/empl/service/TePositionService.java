@@ -19,5 +19,9 @@ public abstract interface TePositionService {
 
 
 	public abstract JSONReturn deletePosition(Long id, String acctName);
+
+
+	public abstract JSONReturn getPositionPage(Long departmentId,
+			String search_name, int page, String acctName);
 	
 }
