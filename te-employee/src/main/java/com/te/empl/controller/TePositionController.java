@@ -33,11 +33,20 @@ public class TePositionController extends AbstractController implements Serializ
 	 * @param request
 	 * @return
 	 */
+	
 	@ResponseBody
 	@RequestMapping(value="/addPosition")
 	public JSONReturn addPosition(@RequestParam Long departmentId, @RequestParam String name,@RequestParam String description,HttpServletRequest request){
 		return tePositionService.addPosition(departmentId,name,description,acctName(request));
 	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/deletePosition")
+	public JSONReturn deletePosition(@RequestParam Long id,HttpServletRequest request){
+		return tePositionService.deletePosition(id,acctName(request));
+	}
+	
 	
 	/**
 	 *  获取下拉菜单的部门列表

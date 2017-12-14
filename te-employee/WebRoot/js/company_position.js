@@ -87,6 +87,7 @@ var position = {
 				},function(data){
 					if(!$.isSuccess(data)) return;
 					position.dataList = data.body;
+					
 					$.each(data.body,function(index,value){
 						$('<tr></tr>')
 						.append($('<td></td>').append(value.id))
@@ -95,9 +96,31 @@ var position = {
 						.append($('<td></td>').append(value.creator))
 						.append($('<td></td>').append(value.department))
 						.append($('<td></td>').append(value.description))
-						.append($('<td></td>').append("")).appendTo(tbody);
+						.append($('<td></td>').append(position.getBtns(index))).appendTo(tbody);
 					});
 					
 				});
+	},
+	//定义编辑与删除按钮
+	getBtns : function(index){
+		var btns = "";
+		btns += "<button type='button' class='btn btn-primary btn-xs' onclick=position.editPosition("+index+")><span class='glyphicon glyphicon-check' aria-hidden='true'></span>&nbsp;编辑</button>";
+		btns += "<button type='button' class='btn btn-danger btn-xs' onclick=position.deletePosition("+index+")><span class='glyphicon glyphicon-remove' aria-hidden='true'></span>&nbsp;删除</button>";
+		return btns;
+	},
+	
+	deletePosition : function(index){
+		if(position.dataList == null || position.dataList.length <= 0){
+			return ;
+		}
+		console.log(position.dataList[index].id);
+		var id = position.dataList[index].id;
+		Dialog.confirm("请确认是否删除选中的职位", function(){
+			$.post('./mgr/0/position/deletePosition',{id : id},function(data){
+				if(!$.isSuccess) return;
+				Dialog.success(data.body);
+				position.init();
+			});
+		});
 	},
 };

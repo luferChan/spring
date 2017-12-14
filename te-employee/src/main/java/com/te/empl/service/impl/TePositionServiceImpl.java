@@ -75,4 +75,20 @@ public class TePositionServiceImpl extends Logable implements TePositionService 
 		}
 		return JSONReturn.buildSuccess(posList);
 	}
+	
+	@Override
+	@Transactional
+	public JSONReturn deletePosition(Long id, String acctName) {
+		// TODO Auto-generated method stub
+		info("{}正在删除职位信息，待删除职位id为{}",acctName,id);
+		TePosition tePosition = tePositionDao.findById(id);
+		if(tePosition == null || tePosition.getState() == TePositionState.delete.getState()){
+			error("\t该职位信息不存在或已被删除！");
+			return JSONReturn.buildFailure("该数据不存在或已被删除！");
+		}
+		tePosition.setState(TePositionState.delete.getState());
+		tePositionDao.update(tePosition);
+		info("删除职位成功！");
+		return JSONReturn.buildSuccess("删除职位成功！");
+	}
 }
