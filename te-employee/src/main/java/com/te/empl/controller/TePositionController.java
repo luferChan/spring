@@ -40,7 +40,28 @@ public class TePositionController extends AbstractController implements Serializ
 		return tePositionService.addPosition(departmentId,name,description,acctName(request));
 	}
 	
+	/**
+	 * 编辑职位信息
+	 * @param positionId
+	 * @param departmentId
+	 * @param name
+	 * @param description
+	 * @param request
+	 * @return
+	 */
 	
+	@ResponseBody
+	@RequestMapping(value="/editPosition")
+	public JSONReturn editPosition(@RequestParam Long positionId,@RequestParam Long departmentId, @RequestParam String name,@RequestParam String description,HttpServletRequest request){
+		return tePositionService.editPosition(positionId,departmentId,name,description,acctName(request));
+	}
+	
+	/**
+	 * 删除职位
+	 * @param id
+	 * @param request
+	 * @return
+	 */
 	@ResponseBody
 	@RequestMapping(value="/deletePosition")
 	public JSONReturn deletePosition(@RequestParam Long id,HttpServletRequest request){

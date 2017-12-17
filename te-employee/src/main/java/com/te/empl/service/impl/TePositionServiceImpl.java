@@ -99,4 +99,27 @@ public class TePositionServiceImpl extends Logable implements TePositionService 
 		;
 		return JSONReturn.buildSuccess(PageUtil.pack(PageConstant.DEFAULT_LINE, tePositionDao.getPositionPage(departmentId,search_name), page));
 	}
+	
+	@Override
+	@Transactional
+	public JSONReturn editPosition(Long positionId,Long departmentId, String name,
+			String description, String acctName) {
+		if(StringUtils.isEmpty(name) || departmentId == -1 || departmentId == null){
+			return JSONReturn.buildFailure("修改失败，职位名称为空或未选择上级部门！");
+		}
+		
+		TePosition tePosition = tePositionDao.findById(positionId);
+		if(tePosition.getState() == TePositionState.delete.getState() || tePosition == null){
+			return JSONReturn.buildFailure("修改失败，该职位不存在或已被删除！");
+		}
+		if(tePosition.getDepartment()==departmentId && tePosition.getName().equals(name) 
+				&& tePosition.getDescription().equals(description)){
+			return JSONReturn.buildFailure("修改失败，修改信息与原数据一致。");
+		}
+		tePosition.setDepartment(departmentId);
+		tePosition.setName(name);
+		tePosition.setDescription(description);
+		tePositionDao.update(tePosition);
+		return JSONReturn.buildSuccess("修改职位信息成功！");
+	}
 }

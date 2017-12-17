@@ -110,6 +110,27 @@
 			</div>
 		</div>
 	</div>
-	      
+	
+	<!-- 编辑职位信息模态框 -->
+	<div class="modal fade" id="editPosiModal" tabindex="-1" role="dialog" aria-labelledby="editPosiModalLabel">
+		<div class="modal-dialog" role="document" style="width: 420px">
+			<div class="modal-content login-modal-content">
+				<div class="modal-header  login-modal-header">        
+					<h4 class="modal-title" id="myModalLabel">编辑职位信息</h4>
+				</div>
+				<div class="modal-body">
+					<select class="form-control edit-posi-select">
+						<option>请选择部门</option>
+					</select>
+					<input type="text" class="form-control edit-posi-input margin_top_10" id="exampleInputEmail1" placeholder="职位名称">
+					<textarea class="form-control margin_top_10 edit-posi-text" rows="2" placeholder="职位描述"></textarea>	  	
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-confirm-edit">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>      
   </body>
 </html>

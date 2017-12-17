@@ -17,7 +17,9 @@ var position = {
 		$('button.btn-search-posi').on('click',function(){
 			position.initPagy();
 		});
-		
+		$('button.btn-confirm-edit').on('click',function(){
+			position.modify();
+		});
 		position.getSearchSelectDepm();
 		
 		
@@ -55,6 +57,18 @@ var position = {
 					$.echoSelect(data.body,'select.select-depm',-1);
 				});
 	},
+	// 获得编辑下拉菜单的部门数据列表
+	getEditSelectDepm : function(){
+		$('input.edit-posi-input,textarea.edit-posi-text').val("");
+
+		$.post('./mgr/0/position/getSelectDepartment',{ },
+				function(data){
+					if(!$.isSuccess(data)) return;
+					$.echoSelect(data.body,'select.edit-posi-select',-1);
+					
+				});
+	},
+	
 	
 	getPagy : function(page){
 		$("#pagination ul").empty(); //每次调用时清空分页组件
@@ -99,6 +113,36 @@ var position = {
 				});
 	},
 	
+	//当前职位ID
+	currentId : null,
+	//修改操作
+	modify : function(){
+		$.verify = true;
+		var dpmId = $.verifySelect('select.edit-posi-select',false);
+		var dpmName = $.verifyForm('input.edit-posi-input',false);
+		var dpmDescription = $.verifyForm('textarea.edit-posi-text',true);
+			
+		if($.verify == false){
+			return ;
+		}
+		
+		var positionId = position.currentId;
+
+		$.post('./mgr/0/position/editPosition',
+				{ 
+					positionId : positionId, 
+					departmentId : dpmId,
+					name : dpmName,
+					description : dpmDescription
+					
+				},function(data){
+					if(!$.isSuccess) return;
+					Dialog.success(data.body);
+					position.initPagy();
+					Dialog.hideModal('#editPosiModal');
+				});
+	},
+	
 	// 职位信息数据列表的展示
 	getPositionList : function(page){
 		var dpmId = $('select.select-depm').val();
@@ -135,11 +179,25 @@ var position = {
 		return btns;
 	},
 	
+	//编辑职位信息
+	editPosition : function(index){
+		if(position.dataList == null || position.dataList.length <= 0){
+			return ;
+		}
+		position.currentId = position.dataList[index].id;
+		
+		position.getEditSelectDepm();
+		Dialog.showModal('#editPosiModal');
+		$('input.edit-posi-input').val(position.dataList[index].name);
+		$('textarea.edit-posi-text').val(position.dataList[index].description);
+	},
+	
+	
 	deletePosition : function(index){
 		if(position.dataList == null || position.dataList.length <= 0){
 			return ;
 		}
-		console.log(position.dataList[index].id);
+		
 		var id = position.dataList[index].id;
 		Dialog.confirm("请确认是否删除选中的职位", function(){
 			$.post('./mgr/0/position/deletePosition',{id : id},function(data){
