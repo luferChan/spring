@@ -21,7 +21,12 @@ var position = {
 			position.modify();
 		});
 		position.getSearchSelectDepm();
-		
+		$('input.posi-search').on('keyup',function(event){ //实现回车键搜索
+    		//回车键的keyCode为13
+    		if(event.keyCode == 13){
+    			position.initPagy();
+    		}
+    	});
 		
 	},
 	
